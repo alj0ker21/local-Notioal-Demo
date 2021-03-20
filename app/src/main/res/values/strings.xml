@@ -6,8 +6,9 @@
     <string name="cook">أطبخ</string>
     <string name="grow">أزرع</string>
     <string name="Shop">تسوق</string>
-    <string name="frind_name_kay">Friend Name</string>
-    <string name="community_kay">Community Kay</string>
+    <!-- don't use spaces in key when you passed params throw intents-->
+    <string name="frind_name_kay">friend_name</string>
+    <string name="community_kay">cummunity_key</string>
     <string name="friend_name_key">friend name</string>
     <string name="type_key">type key</string>
     <string name="share_with">شاركه مع</string>

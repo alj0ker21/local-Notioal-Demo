@@ -1,6 +1,7 @@
 package com.example.nouritshlocal.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,52 +17,63 @@ import com.example.nouritshlocal.model.Community;
 
 import java.util.ArrayList;
 
-public class CommunityRecyclerViewAdapter extends RecyclerView.Adapter {
+public class CommunityRecyclerViewAdapter extends RecyclerView.Adapter<CommunityRecyclerViewAdapter.ViewHolder> {
 
     ArrayList<Community> dataList;
     Context context;
+    /** ------------------------------------------------------------------------------------------
+     * @param  list used to pass list array list to adapter
+     * @param context  used to get current context for ex: main activity
+     *  ------------------------------------------------------------------------------------------
+     * */
 
-    public  CommunityRecyclerViewAdapter(ArrayList<Community> list , Context context){
+    public  CommunityRecyclerViewAdapter(ArrayList<Community> list , Context context) {
         dataList = list;
         this.context = context;
     }
+    /** ------------------------------------------------------------------------------------------ */
+
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.comunity_list_view, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v, context, dataList);
     }
+
+    /** ------------------------------------------------------------------------------------------ */
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).titleView.setText(dataList.get(position).getName());
-        ((ViewHolder) holder).imageView.setImageResource(dataList.get(position).getImageReference());
-        final int index = holder.getAdapterPosition();
-        ((ViewHolder) holder).view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) context).openDetails(dataList.get(index));
-            }
-        });
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        holder.titleView.setText(dataList.get(position).getName());
+        holder.imageView.setImageResource(dataList.get(position).getImageReference());
+        // you cant do on click listener here
     }
+
+    /** ------------------------------------------------------------------------------------------ */
 
     @Override
     public int getItemCount() {
         return dataList.size();
     }
+    /** ------------------------------------------------------------------------------------------ */
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public View view;
         public TextView  titleView;
         public ImageView imageView;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, Context context, ArrayList<Community> list) {
             super(itemView);
-            view = itemView;
-            titleView = itemView.findViewById(R.id.titleTextView);
-            imageView = itemView.findViewById(R.id.imageView);
+            titleView = itemView.findViewById(R.id.community_title);
+            imageView = itemView.findViewById(R.id.community_img);
+            // the correct place to do on click listener in your case
+            itemView.setOnClickListener(view -> {
+                ((MainActivity) context).openDetails(list.get(getAdapterPosition()));
+            });
         }
+
     }
+    /** ------------------------------------------------------------------------------------------ */
+
 }

@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
    >
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:id="@+id/community_img"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:scaleType="center"
         app:srcCompat="@drawable/cook" />
 
     <TextView
-        android:id="@+id/title_text_view"
+        android:id="@+id/community_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
